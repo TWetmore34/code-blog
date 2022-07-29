@@ -2,7 +2,8 @@ const emailLogin = document.getElementById('email-login');
 const passwordLogin = document.getElementById('password-login');
 const loginEl = document.getElementById('login-submit');
 
-async function loginHandler () {
+async function loginHandler (e) {
+    e.preventDefault()
     console.log(emailLogin.value)
     console.log(passwordLogin.value)
     const loggedin = await fetch('/api/users/login', {
@@ -14,7 +15,9 @@ async function loginHandler () {
         headers: { 'content-type': 'application/json' }
     })
     if(loggedin.ok){
-        console.log('logged in!')
+        document.location.replace('/')
+    } else {
+        alert('Failed to log in')
     }
 };
 

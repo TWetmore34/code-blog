@@ -10,15 +10,27 @@ router.get('/', async (req, res) => {
 
 // create new user
 router.post('/', async (req, res) => {
-    // make sure we add a hash on the password! itll be w a hook on before create
+    try{
     const newUser = await {
         email: req.body.email,
         name: req.body.name,
         password: req.body.password
     }
-    console.log(newUser)
+    if(!newUser) {
+        res.status(404).json({ msg: 'please give a valid email, password, and name' })
+        return
+    };
     User.create(newUser)
+    req.session.save(() => {
+        req.session.id = newUser.id;
+        req.session.logged_in = true;
+    });
+    console.log(req.session)
     res.status(201).json(newUser)
+}
+    catch (err) {
+        res.status(500).json(err)
+    }
 });
 
 // login request
@@ -37,7 +49,12 @@ router.post('/login', async (req, res) => {
 
     if (compare === true){
         // just change this to set the session logged in to true once we have sessions
-        res.status(200).json({ msg: "logged In" })
+        req.session.save(() => {
+            req.session.id = setUser.id;
+            req.session.logged_in = true
+            res.status(200).json({ user: setUser, msg: 'you are now logged in!' })
+        });
+        console.log(req.session)
     } else {
         res.status(400).json({ msg: 'incorrect username or password. Try again!' })
     }

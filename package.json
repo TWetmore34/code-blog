@@ -22,7 +22,8 @@
     "express-session": "^1.17.1",
     "handlebars": "^4.7.6",
     "mysql2": "^2.2.5",
-    "sequelize": "^6.3.5"
+    "sequelize": "^6.3.5",
+    "connect-session-sequelize": "^7.0.4"
   },
   "bugs": {
     "url": "https://github.com/TWetmore34/code-blog/issues"
