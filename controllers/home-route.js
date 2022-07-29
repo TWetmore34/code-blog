@@ -1,7 +1,5 @@
 const router = require('express').Router();
-const session = require('express-session');
 const { Post, User, Comment } = require('../models');
-const { findByPk } = require('../models/Post');
 const withAuth = require('../utils/auth')
 
 router.get('/', async (req, res) => {
@@ -20,7 +18,7 @@ router.get('/post/:id', async (req, res) => {
             include: {model: User } }]
     });
     const post = postData.get({ plain: true })
-    console.log(post.Comments)
+    console.log(post)
     res.render('post-view', { post })
 });
 
@@ -29,12 +27,11 @@ router.get('/login', (req,res) => {
     res.render('login')
 });
 
+// get request for dashboard
 router.get('/dashboard', withAuth, async (req,res) => {
     const userData = await User.findByPk(req.session.user_id)
-    const user = userData.get({ plain: true })
-    console.log(user)
+    const user = await userData.get({ plain: true })
     res.render('dashboard', user)
-})
-
+});
 
 module.exports = router;

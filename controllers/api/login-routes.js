@@ -3,10 +3,10 @@ const { User } = require('../../models');
 const bcrypt = require('bcryptjs');
 
 // get all users (For testing only)
-// router.get('/', async (req, res) => {
-//     const userData = await User.findAll()
-//     res.json(userData)
-// })
+router.get('/', async (req, res) => {
+    const userData = await User.findAll()
+    res.json(userData)
+})
 
 // create new user
 router.post('/', async (req, res) => {
@@ -90,9 +90,7 @@ router.put('/email', async (req, res) => {
             id: req.session.user_id
         }
     });
-    console.log(currentUser)
     currentUser.email = req.body.email
-    console.log(currentUser)
     res.status(200).json(currentUser.email)
     }
     catch (err) {

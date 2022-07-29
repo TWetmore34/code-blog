@@ -13,3 +13,12 @@ a {
 .inline {
     display: inline;
 }
+
+.block {
+    display: block;
+}
+
+.left {
+    position: relative;
+    left: 13%;
+}

@@ -4,7 +4,6 @@ const password = document.getElementById('password');
 const submitEl = document.getElementById('create-user');
 
 async function createUser (e) {
-    e.preventDefault()
     const response = await fetch('/api/users', {
         method: 'POST',
         body: JSON.stringify({
@@ -15,7 +14,9 @@ async function createUser (e) {
         headers: { 'content-type': 'application/json' }
     })
     if(response.ok) {
-        console.log('User created!')
+        document.location.replace('/dashboard')
+    } else {
+        console.log('go fuck urself')
     }
 }
 

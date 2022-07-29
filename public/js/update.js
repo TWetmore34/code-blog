@@ -2,8 +2,7 @@ const updateEl = document.getElementById('submit');
 const emailEl = document.getElementById('email');
 const emailParent = document.getElementById('email-parent')
 
-console.log(emailParent.children)
-
+// updates email
 updateEl.addEventListener('click', (e) => {
     e.stopPropagation()
     // grab current email for input value
@@ -20,7 +19,7 @@ updateEl.addEventListener('click', (e) => {
     updateButton.innerHTML = 'Update'
     console.log(updateButton)
 
-    updateButton.addEventListener('click', () => {
+    updateButton.addEventListener('click', (e) => {
         fetch('/api/users/email', {
             method: 'PUT',
             body: JSON.stringify({ 
@@ -29,4 +28,25 @@ updateEl.addEventListener('click', (e) => {
             headers: { 'content-type': 'application/json' },
         })
     })
+});
+
+// add new post
+const postButton = document.getElementById('post');
+const postTitle = document.getElementById('post-title');
+const postContent = document.getElementById('post-content');
+
+
+postButton.addEventListener('click', async (e) => {
+
+    const newPost = await fetch('/api/posts', {
+        method: 'POST',
+        body: JSON.stringify({
+            title: postTitle.value,
+            post_content: postContent.value,
+        }),
+        headers: { 'content-type': 'application/json' }
+    })
+    if(newPost.ok) {
+        document.location.replace('/dashboard')
+    } 
 });
