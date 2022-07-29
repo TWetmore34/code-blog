@@ -9,3 +9,7 @@ ul {
 a {
     color: white;
 }
+
+.inline {
+    display: inline;
+}

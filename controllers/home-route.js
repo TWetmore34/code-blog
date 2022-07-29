@@ -1,5 +1,7 @@
 const router = require('express').Router();
-const { Post, User, Comment } = require('../models')
+const session = require('express-session');
+const { Post, User, Comment } = require('../models');
+const { findByPk } = require('../models/Post');
 const withAuth = require('../utils/auth')
 
 router.get('/', async (req, res) => {
@@ -27,9 +29,11 @@ router.get('/login', (req,res) => {
     res.render('login')
 });
 
-router.get('/dashboard', withAuth, (req,res) => {
-    console.log(req.session)
-    res.render('dashboard', req.session)
+router.get('/dashboard', withAuth, async (req,res) => {
+    const userData = await User.findByPk(req.session.user_id)
+    const user = userData.get({ plain: true })
+    console.log(user)
+    res.render('dashboard', user)
 })
 
 

@@ -3,10 +3,10 @@ const { User } = require('../../models');
 const bcrypt = require('bcryptjs');
 
 // get all users (For testing only)
-router.get('/', async (req, res) => {
-    const userData = await User.findAll()
-    res.json(userData)
-})
+// router.get('/', async (req, res) => {
+//     const userData = await User.findAll()
+//     res.json(userData)
+// })
 
 // create new user
 router.post('/', async (req, res) => {
@@ -50,7 +50,7 @@ router.post('/login', async (req, res) => {
     if (compare === true){
         // just change this to set the session logged in to true once we have sessions
         req.session.save(() => {
-            req.session.id = setUser.id;
+            req.session.user_id = setUser.id;
             req.session.logged_in = true
             res.status(200).json({ user: setUser, msg: 'you are now logged in!' })
         });
@@ -66,13 +66,37 @@ router.post('/login', async (req, res) => {
 
 // logout request
 router.post('/logout', (req, res) => {
-    console.log(req.session)
+    try {
     if(req.session.logged_in) {
         req.session.destroy(() => {
             res.status(204).end();
         });
     } else {
         res.status(404).end();
+    }
+}
+    catch (err) {
+        res.status(500).json(err)
+    }
+});
+
+// update email
+router.put('/email', async (req, res) => {
+    try{
+    const currentUser = await User.update({
+        email: req.body.email
+    }, {
+        where: {
+            id: req.session.user_id
+        }
+    });
+    console.log(currentUser)
+    currentUser.email = req.body.email
+    console.log(currentUser)
+    res.status(200).json(currentUser.email)
+    }
+    catch (err) {
+        res.status(500).json(err)
     }
 })
 
