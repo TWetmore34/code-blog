@@ -2,8 +2,8 @@ const { Post } = require('../models');
 
 let posts = [
     {
-        title: 'how i slept with your mother',
-        post_content: 'well you see, i had sex with your mom',
+        title: 'WHAAAAAAT???!!!??',
+        post_content: 'HOW DOES THIS WORK????????!!!!',
         user_id: 1
     },{
         title: 'Community',
