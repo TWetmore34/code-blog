@@ -15,8 +15,6 @@ async function createUser (e) {
     })
     if(response.ok) {
         document.location.replace('/dashboard')
-    } else {
-        console.log('go fuck urself')
     }
 }
 

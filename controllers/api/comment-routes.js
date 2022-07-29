@@ -5,7 +5,7 @@ const { Comment } = require('../../models')
 router.post('/', (req, res) => {
     const newComment = {
         content: req.body.content,
-        user_id: req.body.user_id,
+        user_id: req.session.user_id,
         post_id: req.body.post_id
     };
     Comment.create(newComment);
