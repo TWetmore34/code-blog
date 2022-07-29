@@ -10,6 +10,6 @@ router.post('/', async (req, res) => {
     };
     Post.create(newPost);
     res.status(201).json({newPost})
-})
+});
 
 module.exports = router;

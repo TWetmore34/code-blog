@@ -3,16 +3,23 @@ const { User } = require('../models');
 let users = [
     {
         name: 'maxie',
-        password: 'asdfjwenrgc'
+        password: 'asdfjwenrgc',
+        email: 'testing@gmail.com'
     },{
         name: 'james',
-        password: 'asdfwetsfd'
+        password: 'asdfwetsfd',
+        email: 'hello@gmail.com'
+
     },{
         name: 'hellowiowie',
-        password: 'asdwfafsefrea'
+        password: 'asdwfafsefrea',
+        email: 'hehehe@gmail.com'
+
     },{
         name: 'heyo!!',
-        password: 'asdfasdfwrbt3'
+        password: 'asdfasdfwrbt3',
+        email: 'yehaw@gmail.com'
+
     },
 ];
 

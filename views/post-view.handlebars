@@ -1,7 +1,17 @@
-<div class="card mx-auto text-center col-10 col-md-8">
+<div class="card mx-auto my-3 py-3 text-center col-10 col-md-8">
         <div class="card-header">
         <h3>{{post.title}}</h3>
         <p>By: {{post.user.name}}</p>
         </div>
         <p>{{post.post_content}}</p>
+</div>
+<div class="card mx-auto my-3 py-3 text-center col-10 col-md-8">
+        <div class="card-body">
+        <h3>Comments</h3>
+        </div>
+        {{#each post.Comments as |comment|}}
+        <p>{{comment.content}}</p>
+        {{!-- how can i change this from a number to the actual username? --}}
+        <p>By: {{comment.user.name}}</p>
+        {{/each}}
 </div>
