@@ -62,6 +62,18 @@ router.post('/login', async (req, res) => {
     catch (err) {
         res.status(500).json({ msg: err })
     }
+});
+
+// logout request
+router.post('/logout', (req, res) => {
+    console.log(req.session)
+    if(req.session.logged_in) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
 })
 
 module.exports = router;

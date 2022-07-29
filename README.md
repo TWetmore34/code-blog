@@ -23,6 +23,7 @@ SO THAT I can publish articles, blog posts, and my thoughts and opinions
 GIVEN a CMS-style blog site
 <!-- we know how to render a main page using handlebars, we know how to setup a basic login option -->
 WHEN I visit the site for the first time
+<!-- so i think the dashboard will end up being a profile page? ill probably pass in the req.session obj to get user details for the render? -->
 THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
 <!-- main layout folder has an anchor element w href=/home -->
 WHEN I click on the homepage option
