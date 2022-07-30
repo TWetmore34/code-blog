@@ -2,8 +2,9 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const session = require('express-session');
-const hbs = exphbs.create({});
 const path = require('path');
+const helpers = require('./utils/helpers')
+const hbs = exphbs.create({ helpers });
 
 // handles routes from controllers/index
 const routes = require('./controllers');
@@ -16,7 +17,9 @@ const SequelizeStore = require('connect-session-sequelize')(session.Store)
 // cookie setup
 const sess = {
     secret: 'secrets secrets are no fun',
-    cookie: {},
+    cookie: {
+    maxAge: 0,
+    },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({

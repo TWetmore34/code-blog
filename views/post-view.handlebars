@@ -1,11 +1,12 @@
-<div class="card mx-auto my-3 py-3 text-center col-10 col-md-8">
         <div class="card-header">
-        <h3>{{post.title}}</h3>
+        <h3 class="inline">{{post.title}}</h3>
         <p>By: {{post.user.name}}</p>
+        <p>{{dateTime post.createdAt}}</p>
         </div>
+        <div class="m-3 card-body">
         <p>{{post.post_content}}</p>
-</div>
-<div class="card mx-auto my-3 py-3 text-center col-10 col-md-8">
+        </div>
+        <div class="card mx-auto my-3 py-3 col-10 col-md-8">
         <h3>Add Comment</h3>
         <textarea data-postid="{{post.id}}" class="mb-3" name="comment" id="comment-content" cols="30" rows="10"></textarea>
         <button id="comment" class="btn btn-primary">Add Comment</button>
@@ -14,10 +15,11 @@
         <hr>
         </div>
         {{#each post.Comments as |comment|}}
+        <div>
+        <h5 class="font-weight-bold inline-block">{{comment.user.name}} <span class="font-weight-light">- {{dateTime comment.createdAt}}</span></h5>
         <p>{{comment.content}}</p>
-        {{!-- how can i change this from a number to the actual username? --}}
-        <p>By: {{comment.user.name}}</p>
         <hr>
+        </div>
         {{/each}}
         
 </div>

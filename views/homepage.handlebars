@@ -6,7 +6,10 @@
             {{post.title}}
             </a>
         </h3>
+            <p>
+                Written by {{post.user.name}}
+            </p>
+            <p class="font-weight-light">{{dateTime post.createdAt}}</p>
         </div>
-        <p>{{post.post_content}}</p>
     </div>
 {{/each}}

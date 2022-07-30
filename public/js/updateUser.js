@@ -50,3 +50,22 @@ postButton.addEventListener('click', async (e) => {
         document.location.replace('/dashboard')
     } 
 });
+
+// delete post
+// dom vars
+const deleteEl = document.querySelectorAll('.delete-me');
+if(deleteEl) {
+    for(i = 0;i < deleteEl.length; i++){
+        deleteEl[i].addEventListener('click', async (e) => {
+            e.preventDefault()
+            const deleted = await fetch(`/api/posts/${e.target.id}`, {
+                method: 'DELETE'
+            })
+            if(deleted.ok){
+                document.location.replace('/dashboard')
+            }
+        })
+    }
+};
+
+// update post

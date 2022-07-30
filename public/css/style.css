@@ -1,5 +1,13 @@
+* {
+    overflow-wrap: break-word;
+}
+
 .bg-custom {
-    background-color: green;
+    background-color: #1B998B;
+}
+
+.bg-new {
+    background-color: #2d304772;
 }
 
 ul {
@@ -21,4 +29,13 @@ a {
 .left {
     position: relative;
     left: 13%;
+}
+
+.size-up {
+    font-size: 200%;
+  }
+
+i:hover{
+    cursor: pointer;
+    border-bottom: 1px solid black;
 }
