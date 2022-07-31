@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const { Comment } = require('../../models')
+const { Comment } = require('../../models');
+const timeoutCheck = require('../../utils/timeoutLogin');
 
 // new Comment
-router.post('/', (req, res) => {
+router.post('/', timeoutCheck, (req, res) => {
     const newComment = {
         content: req.body.content,
         user_id: req.session.user_id,
@@ -10,6 +11,10 @@ router.post('/', (req, res) => {
     };
     Comment.create(newComment);
     res.json({newComment})
+});
+
+router.delete('/:id', timeoutCheck, (req, res) => {
+    Comment.destroy({ where: { id: req.params.id }})
 });
 
 module.exports = router;

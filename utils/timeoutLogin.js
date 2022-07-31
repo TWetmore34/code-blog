@@ -1,14 +1,21 @@
+const moment = require('moment');
+// change this to be on true idle instead of on certain page loads
 function timeoutCheck (req, res, next) {
-    try {
-        // so im having an issue where this doesnt actually reset the global var? 
-        // conceptually ik im heading in the rihgt direction with this, its just not wokring
-        const date = new Date(req.session.cookie._expires.getMinutes()+10)
-        req.session.cookie._expires = date
-        next()
-    }
-    catch (err) {
-        res.status(500).json(err)
-    }
+        if(req.session.cookie._expires.getMinutes() > parseInt(moment().format('mm'))){
+            let userId = req.session.user_id
+            let loggedIn = req.session.logged_in
+            req.session.regenerate(err => {
+                if(err) throw err
+            });
+            req.session.save(() => {
+                req.session.logged_in = loggedIn
+                req.session.user_id = userId
+            })
+            
+            next();
+        } else {
+            res.redirect('/login');
+        }
 }
 
-module.exports = timeoutCheck
+module.exports = timeoutCheck;

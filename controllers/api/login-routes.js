@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     };
     User.create(newUser)
     req.session.save(() => {
-        req.session.id = newUser.id;
+        req.session.user_id = newUser.id;
         req.session.logged_in = true;
     });
     console.log(req.session)

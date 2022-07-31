@@ -1,9 +1,6 @@
 const router = require('express').Router();
-const session = require('express-session');
-const moment = require('moment');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
-const timeoutCheck = require('../utils/timeoutLogin');
 
 // get all posts
 router.get('/', async (req, res) => {
@@ -13,7 +10,7 @@ router.get('/', async (req, res) => {
     })
     const posts = postsData.map(post => post.get({ plain: true }))
     let sessionId = req.session
-    console.log(req.session.cookie._expires.getMinutes())
+    console.log(req.session)
     // render to home page
     res.render('homepage', { posts, sessionId });
 });
@@ -31,7 +28,7 @@ router.get('/post/:id', async (req, res) => {
 });
 
 // sinlge post view for update
-router.get('/post/update/:id', timeoutCheck, async (req, res) => {
+router.get('/post/update/:id', async (req, res) => {
     const postData = await Post.findByPk(req.params.id, {
         include: [{ model: User }, { model: Comment, 
             include: {model: User } }]
@@ -52,7 +49,7 @@ router.get('/login', (req,res) => {
 });
 
 // get request for dashboard
-router.get('/dashboard', timeoutCheck, withAuth, async (req,res) => {
+router.get('/dashboard', withAuth, async (req,res) => {
     const userData = await User.findByPk(req.session.user_id, {
         include: [{model: Post}]
     })
