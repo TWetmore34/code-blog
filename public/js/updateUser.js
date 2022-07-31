@@ -52,15 +52,19 @@ postButton.addEventListener('click', async (e) => {
 });
 
 // delete post
-// dom vars
+// dom var
 const deleteEl = document.querySelectorAll('.delete-me');
+// if there is an object w the delete.me class, create a series of event listeners
+// (if statement is there to prevent error msg on a null eventListener)
 if(deleteEl) {
     for(i = 0;i < deleteEl.length; i++){
         deleteEl[i].addEventListener('click', async (e) => {
             e.preventDefault()
+            // delete request
             const deleted = await fetch(`/api/posts/${e.target.id}`, {
                 method: 'DELETE'
             })
+            // if successful, refresh page
             if(deleted.ok){
                 document.location.replace('/dashboard')
             }

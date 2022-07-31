@@ -3,7 +3,8 @@ const userName = document.getElementById('username');
 const password = document.getElementById('password');
 const submitEl = document.getElementById('create-user');
 
-async function createUser (e) {
+// add new user
+async function createUser () {
     const response = await fetch('/api/users', {
         method: 'POST',
         body: JSON.stringify({

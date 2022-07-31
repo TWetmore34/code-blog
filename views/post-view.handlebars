@@ -18,6 +18,8 @@
         <div>
         <h5 class="font-weight-bold inline-block">{{comment.user.name}} <span class="font-weight-light">- {{dateTime comment.createdAt}}</span></h5>
         <p>{{comment.content}}</p>
+        {{!-- seems like we cant acces any vars other that comment in here? thats for sure a little annoying for the plan --}}
+        {{!-- need to render this on if session.user_id === comment.user_id but im not sure its possible --}}
         <hr>
         </div>
         {{/each}}

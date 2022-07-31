@@ -1,5 +1,6 @@
 const updatePost = document.getElementById('update-post');
 
+// request for post update
 updatePost.addEventListener('click', async (e) => {
     e.preventDefault()
     const updated = await fetch(`/api/posts/${e.target.dataset.postid}`, {

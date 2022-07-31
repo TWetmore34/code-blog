@@ -1,5 +1,6 @@
 const logoutEl = document.getElementById('logout');
 
+// logout delete request
 logoutEl.addEventListener('click', async (e) => {
     e.preventDefault();
     const logout = await fetch('/api/users/logout', {
