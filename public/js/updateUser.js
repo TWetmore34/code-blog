@@ -72,4 +72,3 @@ if(deleteEl) {
     }
 };
 
-// update post

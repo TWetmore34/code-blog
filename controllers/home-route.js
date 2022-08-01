@@ -11,7 +11,9 @@ router.get('/', async (req, res) => {
     // serialize dataset
     const posts = postsData.map(post => post.get({ plain: true }))
     // makes sure we can send the session obj
-    let session = req.session
+    const session = req.session
+    console.log(session)
+
     // render to home page
     res.render('homepage', { posts, session });
 });
@@ -58,11 +60,23 @@ router.get('/login', (req,res) => {
 router.get('/dashboard', withAuth, async (req,res) => {
     // grabs user from db
     const userData = await User.findByPk(req.session.user_id, {
-        include: [{model: Post}]
+        include: [{ model: Post }, { model: Comment }]
     })
     // send user data for page render
     const user = await userData.get({ plain: true })
+    console.log(user)
+
     res.render('dashboard', user)
+});
+
+// render comment for update
+// add comment display to dashboard for a links to these
+// We can store the id vals as the link so comment/update/{{comment.user.id}}
+router.get('/comment/update/:id', async (req, res) => {
+    const commentData = await Comment.findByPk(req.params.id)
+    const comment = await commentData.get({ plain: true })
+    console.log(comment)
+    res.render('commentUpdate', {comment})
 });
 
 module.exports = router;

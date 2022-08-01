@@ -26,11 +26,11 @@
             </form>
         </div>
             <div class="card">
-            <div class="card-header bg-new">
-            <h3>My Posts</h3>
-            {{#if posts}}
-            {{#each posts as |post|}}
-            <div class="card-body text-center bg-light">
+                <div class="card-header bg-new">
+                    <h3>My Posts</h3>
+                    {{#if posts}}
+                    {{#each posts as |post|}}
+                <div class="card-body text-center bg-light">
                 <h3>
                     <a class="text-dark card-title" href="/post/{{post.id}}">
                     {{post.title}}
@@ -51,12 +51,44 @@
                     <hr>
             </div>
             {{/each}}
+
             {{else}}
             <div class="card-body text-center bg-light">
                 <h3>add a post!</h3>
             </div>
             {{/if}}
-            
+            </div>
+
+            <div class="card-header bg-new">
+                <h3>My comments</h3>
+            {{#if Comments}}
+            {{#each Comments as |comment|}}
+            <div class="card-body text-center bg-light">
+                <h3>
+                    <a class="text-dark card-title" href="/post/{{post.id}}">
+                    {{comment.content}}
+                    </a>
+
+                    </h3>
+                    <p class="card-text">{{dateTime comment.createdAt}}</p>
+                    <ul>
+                        <li>
+                        <i id="{{comment.id}}" class="size-up delete-me">&#x2421;</i>
+                        </li>
+                        <li>
+                            <a href="/comment/update/{{comment.id}}" class="text-dark">
+                            &#8635;
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+            </div>
+            {{/each}}
+            {{else}}
+            <div class="card-body text-center bg-light">
+                <h3>add a Comment!</h3>
+            </div>
+            {{/if}}
             </div>
             </div>
     </div>

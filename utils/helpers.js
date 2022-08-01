@@ -4,9 +4,9 @@ module.exports = {
     dateTime: (time) => {
         return moment(time).format('MMMM Do YY')
     },
-    compareId: ((id1, id2) => {
-        if(id1 === id2) {
-            return true
+    compareId: ((id1, req, res) => {
+        if(id1 === req.session.user_id) {
+            return `${id1}`
         } else {
             return false
         }

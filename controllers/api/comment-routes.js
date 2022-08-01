@@ -17,6 +17,20 @@ router.post('/', timeoutCheck, withAuth, (req, res) => {
     res.json({newComment})
 });
 
+// update comment
+router.put('/:id', async (req, res) => {
+    const updateMe = await {
+        content: req.body.content,
+    }
+    const updated = await Comment.update(updateMe, {
+        where: {
+            id: req.params.id
+        }
+    })
+    console.log(updated)
+    res.status(200).json(updated)
+})
+
 router.delete('/:id', timeoutCheck, withAuth, (req, res) => {
     // destroy selected comment. delete request accesses with e.target.user_id
     Comment.destroy({ where: { id: req.params.id }})
