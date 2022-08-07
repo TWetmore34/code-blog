@@ -3,10 +3,10 @@ const { User } = require('../../models');
 const bcrypt = require('bcryptjs');
 
 // get all users (For testing only)
-router.get('/', async (req, res) => {
-    const userData = await User.findAll()
-    res.json(userData)
-})
+// router.get('/', async (req, res) => {
+//     const userData = await User.findAll()
+//     res.json(userData)
+// })
 
 // create new user
 router.post('/', async (req, res) => {
@@ -24,6 +24,11 @@ router.post('/', async (req, res) => {
     };
     // commit user to db
     User.create(newUser)
+
+    // regen cookie for timeoutAuth function reset
+    req.session.regenerate(err => {
+        if(err) throw err
+    });
     // create logged_in prop and save user_id for conditional rendering
     req.session.save(() => {
         req.session.user_id = newUser.id;
@@ -55,6 +60,10 @@ router.post('/login', async (req, res) => {
     const compare = await bcrypt.compare(req.body.password, setUser.password)
 
     if (compare) {
+        // regen cookie for timeoutAuth function reset
+        req.session.regenerate(err => {
+            if(err) throw err
+        });
         // set loggedin and user id
         req.session.save(() => {
             req.session.user_id = setUser.id;

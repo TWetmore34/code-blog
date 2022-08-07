@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { Comment } = require('../../models');
-const timeoutCheck = require('../../utils/timeoutLogin');
 const withAuth = require('../../utils/auth');
 
 

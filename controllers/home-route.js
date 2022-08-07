@@ -68,7 +68,7 @@ router.get('/dashboard', withAuth, async (req,res) => {
     const user = await userData.get({ plain: true })
 
     const session = req.session
-    console.log(user)
+    console.log(session)
 
     res.render('dashboard', {user, session})
 });

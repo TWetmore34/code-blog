@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { Post } = require('../../models');
-const timeoutCheck = require('../../utils/timeoutLogin')
 
 // find all posts as json (for testing)
 // router.get('/', async (req, res) => {
@@ -10,7 +9,7 @@ const timeoutCheck = require('../../utils/timeoutLogin')
 // });
 
 // create new post
-router.post('/', timeoutCheck, async (req, res) => {
+router.post('/', async (req, res) => {
     // grab req.body for newPost
     let newPost = {
         title: req.body.title,
