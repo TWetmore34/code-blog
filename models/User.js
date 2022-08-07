@@ -34,7 +34,6 @@ User.init(
     {
         
         hooks: {
-            // fixme pls
             async beforeCreate (newUserData) {
                 const newPass = await bcrypt.hash(newUserData.password, 8)
                 newUserData.password = newPass

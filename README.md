@@ -1,6 +1,4 @@
 # 14 Model-View-Controller (MVC): Tech Blog
-<!-- TODO: add conditional login/logout button -->
-<!-- add conditional loading for comment update and delete -->
 <!-- comment update and delete functions -->
 
 ## Your Task

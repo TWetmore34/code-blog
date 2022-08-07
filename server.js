@@ -26,6 +26,7 @@ const sess = {
         db: sequelize
       })
 }
+// nodemailer setup
 
 // declare express app 
 const app = express();

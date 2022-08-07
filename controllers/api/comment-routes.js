@@ -5,7 +5,7 @@ const withAuth = require('../../utils/auth');
 
 
 // new Comment
-router.post('/', timeoutCheck, withAuth, (req, res) => {
+router.post('/', withAuth, (req, res) => {
     // create new comment obj with req.body
     const newComment = {
         content: req.body.content,
@@ -31,7 +31,7 @@ router.put('/:id', async (req, res) => {
     res.status(200).json(updated)
 })
 
-router.delete('/:id', timeoutCheck, withAuth, (req, res) => {
+router.delete('/:id', withAuth, (req, res) => {
     // destroy selected comment. delete request accesses with e.target.user_id
     Comment.destroy({ where: { id: req.params.id }})
 });

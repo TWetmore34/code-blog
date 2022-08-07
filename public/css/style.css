@@ -35,7 +35,11 @@ a {
     font-size: 200%;
   }
 
-i:hover{
+/* .delete-me:hover{
     cursor: pointer;
     border-bottom: 1px solid black;
+} */
+
+.refresh {
+    color: black;
 }

@@ -3,10 +3,10 @@ const { User } = require('../../models');
 const bcrypt = require('bcryptjs');
 
 // get all users (For testing only)
-// router.get('/', async (req, res) => {
-//     const userData = await User.findAll()
-//     res.json(userData)
-// })
+router.get('/', async (req, res) => {
+    const userData = await User.findAll()
+    res.json(userData)
+})
 
 // create new user
 router.post('/', async (req, res) => {

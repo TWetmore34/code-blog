@@ -1,9 +1,9 @@
 const updateEl = document.getElementById('update');
 const commentId  = document.getElementById('comment').dataset.comment
-console.log(updateEl)
-console.log(`/api/comments/` + commentId)
+
+// update comment
 updateEl.addEventListener('click', async () => {
-    console.log(document.getElementById('comment').value)
+
     const updated = await fetch(`/api/comments/` + commentId, {
         method: 'PUT',
         body: JSON.stringify({
@@ -16,4 +16,4 @@ updateEl.addEventListener('click', async () => {
     } else {
         alert('Failed to update comment')
     }
-})
+});

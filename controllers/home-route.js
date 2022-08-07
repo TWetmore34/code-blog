@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { Session } = require('express-session');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
@@ -12,7 +13,6 @@ router.get('/', async (req, res) => {
     const posts = postsData.map(post => post.get({ plain: true }))
     // makes sure we can send the session obj
     const session = req.session
-    console.log(session)
 
     // render to home page
     res.render('homepage', { posts, session });
@@ -29,6 +29,7 @@ router.get('/post/:id', async (req, res) => {
     const post = postData.get({ plain: true })
     const session = req.session
     // render user res
+    console.log(session)
     res.render('post-view', { post, session })
 });
 
@@ -41,7 +42,6 @@ router.get('/post/update/:id', async (req, res) => {
     });
     const post = postData.get({ plain: true })
 
-    const session = req.session
     // last check to make sure users can only edit their posts
     if(session.user_id !== post.user_id){
         res.redirect('/login')
@@ -53,7 +53,9 @@ router.get('/post/update/:id', async (req, res) => {
 
 // get request for login
 router.get('/login', (req,res) => {
-    res.render('login')
+    const session = req.session
+
+    res.render('login', session)
 });
 
 // get request for dashboard
@@ -64,9 +66,11 @@ router.get('/dashboard', withAuth, async (req,res) => {
     })
     // send user data for page render
     const user = await userData.get({ plain: true })
+
+    const session = req.session
     console.log(user)
 
-    res.render('dashboard', user)
+    res.render('dashboard', {user, session})
 });
 
 // render comment for update
@@ -75,8 +79,10 @@ router.get('/dashboard', withAuth, async (req,res) => {
 router.get('/comment/update/:id', async (req, res) => {
     const commentData = await Comment.findByPk(req.params.id)
     const comment = await commentData.get({ plain: true })
-    console.log(comment)
-    res.render('commentUpdate', {comment})
+
+    const session = req.session
+
+    res.render('commentUpdate', {comment, session})
 });
 
 module.exports = router;

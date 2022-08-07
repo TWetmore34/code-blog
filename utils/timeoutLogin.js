@@ -16,6 +16,13 @@ function timeoutCheck (req, res, next) {
             })
             next();
         } else {
+            req.session.regenerate(err => {
+                if(err) throw err
+            });
+            req.session.save(() => {
+                req.session.user_id = req.session.user_id
+                req.session.logged_in = false
+            })
             res.redirect('/login');
         }
 }

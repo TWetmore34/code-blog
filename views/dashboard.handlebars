@@ -1,11 +1,11 @@
 <div class="user-info">
     <div class="card">
         <div class="card-header bg-new">
-        <h3>Profile Name: {{name}}</h3>
+        <h3>Profile Name: {{user.name}}</h3>
         </div>
         <div id="email-parent" class="card-body">
             <h5 class="inline mx-3 p-3">
-                email: <span id='email'>{{email}}</span>
+                email: <span id='email'>{{user.email}}</span>
             </h5>
             <button id="submit" class="btn btn-secondary inline">Update</button>
         </div>
@@ -28,8 +28,8 @@
             <div class="card">
                 <div class="card-header bg-new">
                     <h3>My Posts</h3>
-                    {{#if posts}}
-                    {{#each posts as |post|}}
+                    {{#if user.posts}}
+                    {{#each user.posts as |post|}}
                 <div class="card-body text-center bg-light">
                 <h3>
                     <a class="text-dark card-title" href="/post/{{post.id}}">
@@ -40,11 +40,11 @@
                     <p class="card-text">{{dateTime post.createdAt}}</p>
                     <ul>
                         <li>
-                        <i id="{{post.id}}" class="size-up delete-me">&#x2421;</i>
+                        <a href="/dashboard" id="{{post.id}}" class="delete-me">&#128465;</a>
                         </li>
                         <li>
                             <a href="/post/update/{{post.id}}" class="text-dark">
-                            &#8635;
+                            &#9998;
                             </a>
                         </li>
                     </ul>
@@ -61,8 +61,8 @@
 
             <div class="card-header bg-new">
                 <h3>My comments</h3>
-            {{#if Comments}}
-            {{#each Comments as |comment|}}
+            {{#if user.Comments}}
+            {{#each user.Comments as |comment|}}
             <div class="card-body text-center bg-light">
                 <h3>
                     <a class="text-dark card-title" href="/post/{{post.id}}">
@@ -73,11 +73,11 @@
                     <p class="card-text">{{dateTime comment.createdAt}}</p>
                     <ul>
                         <li>
-                        <i id="{{comment.id}}" class="size-up delete-me">&#x2421;</i>
+                        <a href="/dashboard" id="{{comment.id}}" class="delete text-center">&#128465;</a>
                         </li>
                         <li>
                             <a href="/comment/update/{{comment.id}}" class="text-dark">
-                            &#8635;
+                            &#9998;
                             </a>
                         </li>
                     </ul>
@@ -94,3 +94,4 @@
     </div>
 </div>
 <script src="/js/updateUser.js"></script>
+<script src="/js/deleteComment.js"></script>
