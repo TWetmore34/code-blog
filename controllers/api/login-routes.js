@@ -24,11 +24,6 @@ router.post('/', async (req, res) => {
     };
     // commit user to db
     User.create(newUser)
-
-    // regen cookie for timeoutAuth function reset
-    req.session.regenerate(err => {
-        if(err) throw err
-    });
     // create logged_in prop and save user_id for conditional rendering
     req.session.save(() => {
         req.session.user_id = newUser.id;

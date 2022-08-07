@@ -10,12 +10,12 @@ let posts = [
         post_content: 'da dum dado da dum bum bum',
         user_id: 2
     },{
-        title: 'Im so tried of writing posts',
-        post_content: 'but wow im so good at testing things!',
+        title: 'These are some fascinating posts here!',
+        post_content: 'and wow im so good at testing things now!',
         user_id: 3
     },{
         title: 'heyo!! howza wowza going',
-        post_content: 'meesa very tired',
+        post_content: 'I am become sleepy, the goer to bed',
         user_id: 4
     },
 ];
